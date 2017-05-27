@@ -1,0 +1,2130 @@
+﻿@model SAM_V7.Models.Proposal
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    .d {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+</style>
+
+
+
+
+@using (Html.BeginForm("Edit", "Proposals", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="d">
+            <center><h1>EDIT PROPOSAL INFORMATION</h1></center>
+        </div>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.DocNo)
+
+        @if ((Session["PSUPassport"] != null) && (Session["Position"].Equals("Advisor") || Session["OrganName"].Equals("Student Council") ||
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Session["Position"].Equals("Head of Student Activity section") || Session["Position"].Equals("Head of Student Affairs division") || Session["Position"].Equals("Assistant to the President for Student Development") ||
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Session["Position"].Equals("Vice President for Academic Affairs for Phuket Campus") || Session["OrganName"].Equals("Student Union")))
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Document Infomation</h3> </div>
+                <div class="panel-body">
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Organization Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OrganName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.OrganName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xs-2 form-group ">
+                        @Html.Label("Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Activity Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.ActName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.ActName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Activity Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Place", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Budget Infomation</h3> </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.Label("Student Activity’s budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.StdBudget, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.StdBudget, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Budget from other source name (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OthName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.OthName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Budget from other source amount (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OthBudget, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.OthBudget, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Total Budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Activity Hour credit as bellowing; (please specify)</h3> </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.Label("Requirement activity", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Public consciousness, morals, ethics and discipline", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Social skill, academic / profession international capability on basis of being Thai", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Pride of Institute being children of the Father, being one without division by academic campus or area", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act4, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Understanding of cultural plurality, democracy", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act5, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Healthy development", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act6, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.Act6, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Attracht File</h3> </div>
+                <div class="panel-body">
+
+                    <center><button onclick="javascript: window.location = '@Url.Action("Download","Proposals",new { @id=@Model.Files.First(f => f.FileType == SAM_V7.Models.FileType.Avatar).FileId})';return false;">Download File</button></center>
+                </div>
+            </div>
+            if (Session["Position"].Equals("Advisor"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result1, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                     new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result1Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (Session["OrganName"].Equals("Student Union"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result2, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                        new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result2Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (Session["OrganName"].Equals("Student Council"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's commen</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result3, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                        new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result3Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = @DateTime.Now.ToShortDateString() })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Session["Position"].Equals("Head of Student Activity section"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Activity section's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Activity section", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result4, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                        new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Activity section's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment4, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result4Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+                                    @Html.ValidationMessageFor(model => model.Result4Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (Session["Position"].Equals("Head of Student Affairs division"))
+            {
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Activity section's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Activity section", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Activity section's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Affairs division's comment</h3> </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Affairs division", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result5, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                       new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Affairs division's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment5, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result5Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+                                    @Html.ValidationMessageFor(model => model.Result5Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Session["Position"].Equals("Assistant to the President for Student Development"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Activity section's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Activity section", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Activity section's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Affairs division's comment</h3> </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Affairs division", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Affairs division's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Assistant to the President for Student Development's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Assistant to the President for Student Development", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result6, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                       new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Assistant to the President for Student Development's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment6, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result6Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+                                    @Html.ValidationMessageFor(model => model.Result6Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Session["Position"].Equals("Vice President for Academic Affairs for Phuket Campus"))
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Activity section's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Activity section", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Activity section's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Affairs division's comment</h3> </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Affairs division", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Affairs division's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Assistant to the President for Student Development's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Assistant to the President for Student Development", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result6, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Assistant to the President for Student Development's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment6, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result6Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result6Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Academic Affairs for Phuket Campus's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Vice President for Academic Affairs for Phuket Campus", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.DropDownListFor(model => model.Result7, new List<SelectListItem>
+                     { new SelectListItem { Text = "Accept", Value = "Accept", Selected=true},
+                       new SelectListItem { Text = "Reject", Value = "Reject"},
+                       new SelectListItem { Text = "Edit", Value = "Edit"},
+                       }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Result7, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Academic Affairs for Phuket Campus's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment7, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment7, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.TextBoxFor(m => m.Result7Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control", @value = DateTime.Now.ToString() })
+                                    @Html.ValidationMessageFor(model => model.Result7Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        }
+        else if (Session["Position"].Equals("Student Activity Staffs"))
+        {
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Document Infomation</h3> </div>
+                <div class="panel-body">
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Organization Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OrganName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OrganName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xs-2 form-group ">
+                        @Html.Label("Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Activity Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.ActName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ActName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Activity Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Place", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Budget Infomation</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Student Activity’s budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.StdBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StdBudget, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Budget from other source name (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.OthName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OthName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Budget from other source amount (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.OthBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OthBudget, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Total Budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Activity Hour credit as bellowing; (please specify)</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Requirement activity", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Public consciousness, morals, ethics and discipline", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Social skill, academic / profession international capability on basis of being Thai", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act3, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Pride of Institute being children of the Father, being one without division by academic campus or area", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act4, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Understanding of cultural plurality, democracy", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act5, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Healthy development", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act6, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Additional Information</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Avatar", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" id="Avatar" name="upload" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Advisor's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from advisor", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Advisor's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result1Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result1Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student Union's comment)</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Student Union", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student Union's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result2Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result2Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Student council's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from student council", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Student council's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment3, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result3Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result3Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Activity section's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Activity section", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Activity section's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment4, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result4Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result4Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Head of Student Affairs division's comment</h3> </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.Label("Approval from Head of Student Affairs division", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Head of Student Affairs division's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment5, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result5Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result5Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">ssistant to the President for Student Development's comment</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Assistant to the President for Student Development", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result6, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Assistant to the President for Student Development's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment6, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result6Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result6Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title"></h3>Vice President for Academic Affairs for Phuket Campus's comment</div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Approval from Vice President for Academic Affairs for Phuket Campus", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result7, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result7, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Academic Affairs for Phuket Campus's comment", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Comment7, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Comment7, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Result7Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Result7Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+        else
+        {
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Proposal Infomation</h3> </div>
+                <div class="panel-body">
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Organization Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OrganName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OrganName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.Date, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xs-2 form-group ">
+                        @Html.Label("Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Activity Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.ActName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ActName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Activity Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", htmlAttributes: new { @type = "date", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-6 form-group ">
+                        @Html.Label("Place", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Budget Infomation</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Student Activity’s budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.StdBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StdBudget, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Budget from other source name (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.OthName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OthName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Budget from other source amount (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.OthBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OthBudget, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Total Budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-12 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Activity Hour credit as bellowing; (please specify)</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Requirement activity", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Public consciousness, morals, ethics and discipline", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Social skill, academic / profession international capability on basis of being Thai", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act3, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Pride of Institute being children of the Father, being one without division by academic campus or area", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act4, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Understanding of cultural plurality, democracy", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act5, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Healthy development", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                    @Html.EditorFor(model => model.Act6, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Act6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <h3 class="panel-title">Additional Information</h3> </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            @Html.Label("Avatar", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" id="Avatar" name="upload">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<br><br>
+
+
+
+<br><br>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

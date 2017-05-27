@@ -1,0 +1,130 @@
+﻿@model IEnumerable<SAM_V7.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #2173c7;
+        color: white;
+    }
+     .d {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .c {
+        border-radius: 5px;
+        background-color: #cda8e2;
+        padding: 20px;
+    }
+</style>
+
+
+<div class="d">
+    <br>
+    <center>
+        <h1>STAFF INFORMATION</h1>
+
+
+        <br>
+
+        <br>
+        <div class="col-md-12">
+            <button class="btn btn-primary" style="margin-left:5px" onclick="location.href='@Url.Action("Create", "Staffs")'">
+                <i class="glyphicon glyphicon-plus"> </i>
+                <label>Add new staff</label>
+            </button>
+        </div>
+     
+    </center>
+    <br>
+</div>
+<br>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Title Name")
+        </th>
+        <th>
+            @Html.DisplayName("FirstName")
+        </th>
+        <th>
+            @Html.DisplayName("LastName")
+        </th>
+        <th>
+            @Html.DisplayName("Organization Name")
+        </th>
+        <th>
+            @Html.DisplayName("Position")
+        </th>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Tel.")
+        </th>
+        <th>
+            @Html.DisplayName("Management")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffTitleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffTel)
+        </td>
+        <td>
+            <button class="btn btn-warning" onclick="location.href='@Url.Action("Edit","Staffs",new { id = item.PSUPassport +"/"})'">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+
+            <button class="btn btn-success" style="margin-left:5px" onclick="location.href='@Url.Action("Details","Staffs",new { id = item.PSUPassport +"/"})'">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </button>
+
+            <button class="btn btn-danger" style="margin-left:5px" onclick="location.href='@Url.Action("Delete","Staffs",new { id = item.PSUPassport +"/"})'">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

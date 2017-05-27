@@ -1,0 +1,90 @@
+﻿@model SAM_V7.Models.Staff
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .d {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .c {
+        border-radius: 5px;
+        background-color: #cda8e2;
+        padding: 20px;
+    }
+</style>
+
+<div class="c">
+    <br>
+    <center><h1>STAFF INFORMATION</h1></center>
+    <br>
+</div>
+<br>
+<div class="d">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Title")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffTitleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Firstname:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lastname:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Organization:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Position:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Email:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Telephone:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffTel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PSUPassport }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

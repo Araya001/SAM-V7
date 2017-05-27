@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+  
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+  
+    @if (Session["PSUPassport"] != null)
+    {
+        <header>
+        <img src="~/image/Header2.png" alt="Mountain View" style="width:100%;height:100%;">
+            </header>
+    }
+
+
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @if (Session["PSUPassport"] != null && Session["PSUPassport"].ToString() == "admin")
+                {
+                    @Html.ActionLink("SAM", "Index", "Staffs", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (Session["PSUPassport"] != null && Session["Position"].Equals("Student Activity Staffs"))
+                {
+                    @Html.ActionLink("SAM", "Index", "Proposals", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if ((Session["PSUPassport"] != null) && (Session["Position"].Equals("Advisor") || Session["Position"].Equals("Student Council") ||
+              Session["Position"].Equals("Head of Student Activity section") || Session["Position"].Equals("Head of Student Affairs division") || Session["Position"].Equals("Assistant to the President for Student Development") ||
+              Session["Position"].Equals("Vice President for Academic Affairs for Phuket Campus")))
+                {
+                    @Html.ActionLink("SAM", "Index", "Proposals", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (Session["PSUPassport"] != null && Session["OrganName"].Equals("Student Union"))
+                {
+                    @Html.ActionLink("SAM", "Index", "Proposals", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (Session["PSUPassport"] == null)
+                {
+                    @Html.ActionLink("SAM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("SAM", "Index", "Proposals", new { area = "" }, new { @class = "navbar-brand" })
+                }
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["PSUPassport"] != null && Session["PSUPassport"].ToString() == "admin")
+                    {
+                        <li> @Html.ActionLink("Staff Management", "Index", "Staffs") </li>
+                    }
+
+                    else if (Session["PSUPassport"] != null && Session["Position"].Equals("Student Activity Staffs"))
+                    {
+
+                        <li> @Html.ActionLink("Proposal Management", "Index", "Proposals") </li>
+                        <li> @Html.ActionLink("Oganization Management", "Index", "Organizations") </li>
+                        <li> @Html.ActionLink("User Management", "Index", "Users") </li>
+                        <li> @Html.ActionLink("Approver Management", "Index", "Approvers") </li>
+                    }
+
+                    else if ((Session["PSUPassport"] != null) && (Session["Position"].Equals("Advisor") || Session["OrganName"].Equals("Student Council") ||
+                Session["Position"].Equals("Head of Student Activity section") || Session["Position"].Equals("Head of Student Affairs division") || Session["Position"].Equals("Assistant to the President for Student Development") ||
+                Session["Position"].Equals("Vice President for Academic Affairs for Phuket Campus")))
+                    {
+
+                        <li> @Html.ActionLink("Proposal Management", "Index", "Proposals") </li>
+                    }
+
+                    else if (Session["PSUPassport"] != null && Session["OrganName"].Equals("Student Union"))
+                    {
+
+                        <li> @Html.ActionLink("Proposal Management", "Index", "Proposals") </li>
+                    }
+                    else if (Session["PSUPassport"] == null)
+                    {
+
+                    }
+                    else
+                    {
+                        <li> @Html.ActionLink("Proposal Management", "Index", "Proposals") </li>
+                    }
+
+                </ul>
+
+                @if (Session["PSUPassport"] != null)
+                {
+                    <ul class="nav navbar-nav navbar-right " align="right">
+                        <li style="margin-top:15px"><span class="label label-default">@Html.DisplayName("Welcome, " + @Session["Name"].ToString()+" ["+ @Session["Position"].ToString()+"]") </span></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                }
+
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right " align="right">
+                        <li>@Html.ActionLink("Login", "Index", "Home")</li>
+                    </ul>
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

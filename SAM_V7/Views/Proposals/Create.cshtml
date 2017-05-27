@@ -1,0 +1,277 @@
+﻿@model SAM_V7.Models.Proposal
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    .d {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+</style>
+
+
+@using (Html.BeginForm("Create", "Proposals", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+  
+        
+
+        <div class="form-horizontal">
+            <div class="d">
+                <center><h1>PROPOSAL INFORMATION</h1></center>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Proposals Infomation</h3> </div>
+                <div class="panel-body">
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Document number", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.DocNo, new { htmlAttributes = new { @class = "form-control"  } })
+                                @Html.ValidationMessageFor(model => model.DocNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Organization Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+
+                                @Html.EditorFor(model => model.OrganName, new { htmlAttributes = new { @class = "form-control" ,Value = @Session["OrganName"].ToString()} })
+                                @Html.ValidationMessageFor(model => model.OrganName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", Value=DateTime.Now.ToShortDateString() } })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Subject", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("Activity Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.ActName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ActName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-2 form-group ">
+                        @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group ">
+                        @Html.Label("Place", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Budget Infomation</h3> </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.Label("Student Activity’s budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.StdBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StdBudget, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Budget from other source name (please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OthName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OthName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Budget from other source amount(please specify)", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.OthBudget, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OthBudget, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Total Budget", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Activity Hour credit as bellowing; (please specify)</h3> </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.Label("Requirement activity", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Public consciousness, morals, ethics and discipline", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Social skill, academic/ profession international capability on basis of being Thai", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act3, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Pride of Institute being children of the Father, being one without division by academic campus or area", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act4, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act4, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Understanding of cultural plurality, democracy", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act5, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act5, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Healthy development", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i></span>
+                                @Html.EditorFor(model => model.Act6, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Act6, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"> <h3 class="panel-title">Addiitional Information</h3> </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.Label("Attachfile", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" id="Avatar" name="upload" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+        <br>
+        }
+
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+            <br><br><br>
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

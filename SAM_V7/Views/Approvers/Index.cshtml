@@ -1,0 +1,107 @@
+﻿@model IEnumerable<SAM_V7.Models.Approvers>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+ table {
+        border-collapse: collapse;
+   
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #2173c7;
+        color: white;
+    }
+    .d {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+</style>
+
+<div class="d">
+    <center>
+<h2>APPROVER INFORMATION</h2>
+
+        <br>
+        <div class="col-md-12">
+            <button class="btn btn-primary" style="margin-left:5px" onclick="location.href='@Url.Action("Create", "Approvers")'">
+                <i class="glyphicon glyphicon-plus"> </i>
+                <label>Add new approvers</label>
+            </button>
+        </div>
+    </center>
+</div>
+<br>
+    
+<br>
+<table class="table">
+    <tr>
+        <th class="col-xs-2">
+            @Html.DisplayName("Title Name")
+        </th>
+        <th>
+            @Html.DisplayName("Firstname")
+        </th>
+        <th>
+            @Html.DisplayName("Lastname")
+        </th>
+        <th class="col-xs-4">
+            @Html.DisplayName("Organization")
+        </th>
+        <th class="col-xs-4">
+            @Html.DisplayName("Position")
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayName("Management")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+
+            <button class="btn btn-warning" onclick="location.href='@Url.Action("Edit","Approvers",new { id=item.PSUPassport +"/"})'">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+
+            <button class="btn btn-success" style="margin-left:5px" onclick="location.href='@Url.Action("Details","Approvers",new { id=item.PSUPassport + "/" })'">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </button>
+
+            <button class="btn btn-danger" style="margin-left:5px" onclick="location.href='@Url.Action("Delete","Approvers",new { id=item.PSUPassport + "/" })'">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+
+        </td>
+    </tr>
+}
+
+</table>

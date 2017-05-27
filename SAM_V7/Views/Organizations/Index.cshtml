@@ -1,0 +1,114 @@
+﻿@model IEnumerable<SAM_V7.Models.Organizations>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #2173c7;
+        color: white;
+    }
+    .d {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .c {
+        border-radius: 5px;
+        background-color: #cda8e2;
+        padding: 20px;
+    }
+</style>
+
+
+
+<div class="d">
+    <br>
+    <center>
+        <h1>ORGANIZATION INFORMATION</h1>
+
+
+        <br>
+
+        <br>
+
+        <div class="col-md-12">
+            <button class="btn btn-primary" style="margin-left:5px" onclick="location.href='@Url.Action("Create", "Organizations")'">
+                <i class="glyphicon glyphicon-plus"> </i>
+                <label>Add new Organization</label>
+            </button>
+        </div>
+    </center>
+    <br>
+</div>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Organization name")
+        </th>
+
+        <th>
+            @Html.DisplayName("Title Name")
+        </th>
+        <th>
+            @Html.DisplayName("Adviser Firstname")
+        </th>
+        <th>
+            @Html.DisplayName("Adviser Lastname")
+        </th>
+        <th>
+            @Html.DisplayName("Management")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleAdviserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdviserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdviserLastName)
+        </td>
+
+        <td>
+            <button class="btn btn-warning" onclick="location.href='@Url.Action("Edit","Organizations",new { id = item.OrganNo})'">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+
+            <button class="btn btn-success" style="margin-left:5px" onclick="location.href='@Url.Action("Details","Organizations",new { id = item.OrganNo })'">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </button>
+
+            <button class="btn btn-danger" style="margin-left:5px" onclick="location.href='@Url.Action("Delete","Organizations",new { id = item.OrganNo })'">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </td>
+
+    </tr>
+}
+
+</table>

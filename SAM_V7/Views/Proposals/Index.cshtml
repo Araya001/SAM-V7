@@ -1,0 +1,735 @@
+﻿@model IEnumerable<SAM_V7.Models.Proposal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+            input[type=text] {
+  
+    padding: 8px 24px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+    input[type=submit] {
+  
+    background-color: #2173c7;
+    color: white;
+    padding: 10px 10px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.d {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+
+    /* Tooltip */
+    .test + .tooltip > .tooltip-inner {
+        background-color: #87CEE8;
+        color: #FFFFFF;
+        border: 1px solid green;
+        padding: 15px;
+        font-size: 20px;
+    }
+    /* Tooltip on top */
+    .test + .tooltip.top > .tooltip-arrow {
+        border-top: 5px solid green;
+    }
+    /* Tooltip on bottom */
+    .test + .tooltip.bottom > .tooltip-arrow {
+        border-bottom: 5px solid blue;
+    }
+    /* Tooltip on left */
+    .test + .tooltip.left > .tooltip-arrow {
+        border-left: 5px solid red;
+    }
+    /* Tooltip on right */
+    .test + .tooltip.right > .tooltip-arrow {
+        border-right: 5px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #2173c7;
+        color: white;
+    }
+
+
+</style>
+<script type="text/javascript">
+     $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+     });
+</script>
+</head>
+
+
+@if ((Session["PSUPassport"] != null) && (Session["Position"].Equals("Advisor") || Session["OrganName"].Equals("Student Council") ||
+                                                                        Session["Position"].Equals("Head of Student Activity section") || Session["Position"].Equals("Head of Student Affairs division") || Session["Position"].Equals("Assistant to the President for Student Development") ||
+                                                                        Session["Position"].Equals("Vice President for Academic Affairs for Phuket Campus") || Session["Position"].Equals("Student Activity Staffs")))
+{
+
+    <div class="d">
+        <br />
+        <center><h1><b>PROPOSAL INFORMATION</b></h1></center>
+        <br>
+
+        @using (Html.BeginForm("Index", "Proposals", FormMethod.Get))
+        {
+        <center>
+            <p>
+
+                <h4><b>Activity's Name: @Html.TextBox("SearchString")
+                    @Html.Hidden(Session["OrganName"].ToString()) <input type="submit" value="Search" /></b></h4>
+            </p>
+        </center>
+        }
+
+       <br>
+
+      
+    </div>
+
+ 
+       
+
+
+    <br>
+       <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Document No.")
+            </th>
+            <th>
+                @Html.DisplayName("Activity Name")
+            </th>
+            <th>
+                @Html.DisplayName("Organization Name")
+            </th>
+            <th>
+                @Html.DisplayName("Document Status")
+            </th>
+            <th>
+                @Html.DisplayName("Management")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrganName)
+                </td>
+                <td>
+
+
+                    @if (item.Result1 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Advisor"></span>}
+                    else if (item.Result1.Equals("Accept"))
+                    {
+                        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Advisor"></span>
+                    }
+                    else if (item.Result1.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                    }
+                    else if (item.Result1.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                    }
+
+
+
+                    @if (item.Result2 == null)
+                    {
+                        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Union"></span>
+                    }
+                    else if (item.Result2.Equals("Accept"))
+                    {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Union"></span>}
+                    else if (item.Result2.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                    }
+                    else if (item.Result2.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                    }
+
+
+                    @if (item.Result3 == null)
+                    {
+                        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Council"></span>
+                    }
+                    else if (item.Result3.Equals("Accept"))
+                    {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Council"></span>}
+                    else if (item.Result3.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                    }
+                    else if (item.Result3.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                    }
+
+
+                    @if (item.Result4 == null)
+                    {
+                        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                    }
+                    else if (item.Result4.Equals("Accept"))
+                    {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>}
+                    else if (item.Result4.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                    }
+                    else if (item.Result4.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                    }
+
+
+                    @if (item.Result5 == null)
+                    {
+                        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                    }
+                    else if (item.Result5.Equals("Accept"))
+                    {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>}
+                    else if (item.Result5.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                    }
+                    else if (item.Result5.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                    }
+
+
+
+                    @if (item.Result6 == null)
+                    {
+                        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                    }
+                    else if (item.Result6.Equals("Accept"))
+                    {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>}
+                    else if (item.Result6.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                    }
+                    else if (item.Result6.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                    }
+
+
+
+                    @if (item.Result7 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>}
+                    else if (item.Result7.Equals("Accept"))
+                    {
+                        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                    }
+                    else if (item.Result7.Equals("Reject"))
+                    {
+                        <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                    }
+                    else if (item.Result7.Equals("Edit"))
+                    {
+                        <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                    }
+
+                </td>
+
+                <td>
+
+                    <button class="btn btn-warning" onclick="location.href='@Url.Action("Edit", "Proposals", new { id = item.DocNo })'">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+
+                    <button class="btn btn-success" style="margin-left:5px" onclick="location.href='@Url.Action("Details", "Proposals", new { id = item.DocNo })'">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </button>
+
+
+                    <button class="btn btn-warning" onclick="location.href='@Url.Action("Remark", "Proposals", new { id = item.DocNo })'">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    </button>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+   
+}
+else if (Session["OrganName"].Equals("Student Union"))
+{
+
+
+    <div class="d">
+        <br />
+        <center><h1><b>PROPOSAL INFORMATION</b></h1></center>
+        <br>
+
+        @using (Html.BeginForm("Index", "Proposals", FormMethod.Get))
+        {
+            <center>
+<p>
+
+                    <h4><b>Activity's Name: @Html.TextBox("SearchString") <input type="submit" value="Search" /></b></h4>
+                </p>
+
+                <br><br>
+
+              
+            </center>
+        }
+        <center>
+        <div class="col-md-12">
+            <button class="btn btn-primary" style="margin-left:5px" onclick="location.href='@Url.Action("Create", "Proposals")'">
+                <i class="glyphicon glyphicon-plus"> </i>
+                <label>Add new Proposal</label>
+            </button>
+        </div>
+            </center>
+                <br>
+</div>
+
+    <br><br>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Document No.")
+                </th>
+                <th>
+                    @Html.DisplayName("Activity Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Organization Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Document Status")
+                </th>
+                <th>
+                    @Html.DisplayName("Management")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DocNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrganName)
+                    </td>
+                    <td>
+
+
+                        @if (item.Result1 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Advisor"></span>}
+                    else if (item.Result1.Equals("Accept"))
+                    {
+                            <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+                        else if (item.Result1.Equals("Reject"))
+                        {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+                        else if (item.Result1.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+
+
+
+                        @if (item.Result2 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result2.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Union"></span>}
+                    else if (item.Result2.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result2.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+
+
+                        @if (item.Result3 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Council"></span>
+                        }
+                        else if (item.Result3.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Council"></span>}
+                    else if (item.Result3.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result3.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+
+
+                        @if (item.Result4 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+                        else if (item.Result4.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>}
+                    else if (item.Result4.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+                        else if (item.Result4.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+
+
+                        @if (item.Result5 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+                        else if (item.Result5.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>}
+                    else if (item.Result5.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+                        else if (item.Result5.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+
+
+
+                        @if (item.Result6 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+                        else if (item.Result6.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>}
+                    else if (item.Result6.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+                        else if (item.Result6.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+
+
+
+                        @if (item.Result7 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>}
+                    else if (item.Result7.Equals("Accept"))
+                    {
+                            <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+                        else if (item.Result7.Equals("Reject"))
+                        {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+                        else if (item.Result7.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" onclick="location.href='@Url.Action("Edit","Proposals",new { id = item.DocNo})'">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
+                        <button class="btn btn-success" style="margin-left:5px" onclick="location.href='@Url.Action("Details","Proposals",new { id = item.DocNo })'">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </button>
+
+
+                        <button class="btn btn-warning" onclick="location.href='@Url.Action("Remark","Proposals",new { id = item.DocNo})'">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        </button>
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+}
+else
+{
+
+
+    <div class="d">
+        <br />
+        <center><h1><b>PROPOSAL INFORMATION</b></h1></center>
+        <br>
+
+        @using (Html.BeginForm("Index", "Proposals", FormMethod.Get))
+        {
+            <center>
+                <p>
+
+                    <h4><b>Activity's Name: @Html.TextBox("SearchString") <input type="submit" value="Search" /></b></h4>
+                </p>
+
+                <br><br>
+            </center>
+        }
+        <center>
+            <div class="col-md-12">
+                <button class="btn btn-primary" style="margin-left:5px" onclick="location.href='@Url.Action("Create", "Proposals")'">
+                    <i class="glyphicon glyphicon-plus"> </i>
+                    <label>Add new Proposal</label>
+                </button>
+            </div>
+            </center>
+            <br>
+
+     
+
+</div>
+
+
+    
+        <br><br>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Document No.")
+                </th>
+                <th>
+                    @Html.DisplayName("Activity Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Organization Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Document Status")
+                </th>
+                <th>
+                    @Html.DisplayName("Management")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DocNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrganName)
+                    </td>
+                    <td>
+
+
+                        @if (item.Result1 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Advisor"></span>}
+                    else if (item.Result1.Equals("Accept"))
+                    {
+                            <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+                        else if (item.Result1.Equals("Reject"))
+                        {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+                        else if (item.Result1.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Advisor"></span>
+                        }
+
+
+
+                        @if (item.Result2 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result2.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Union"></span>}
+                    else if (item.Result2.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result2.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+
+
+                        @if (item.Result3 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Student Council"></span>
+                        }
+                        else if (item.Result3.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Student Council"></span>}
+                    else if (item.Result3.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+                        else if (item.Result3.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Student Union"></span>
+                        }
+
+
+                        @if (item.Result4 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+                        else if (item.Result4.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>}
+                    else if (item.Result4.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+                        else if (item.Result4.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Activity section"></span>
+                        }
+
+
+                        @if (item.Result5 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+                        else if (item.Result5.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>}
+                    else if (item.Result5.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+                        else if (item.Result5.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Head of Student Affairs division"></span>
+                        }
+
+
+
+                        @if (item.Result6 == null)
+                    {
+                            <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+                        else if (item.Result6.Equals("Accept"))
+                        {        <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>}
+                    else if (item.Result6.Equals("Reject"))
+                    {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+                        else if (item.Result6.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Assistant to the President for Student Development"></span>
+                        }
+
+
+
+                        @if (item.Result7 == null)
+                    {        <span class="glyphicon glyphicon-time" style="color:#EB984E" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>}
+                    else if (item.Result7.Equals("Accept"))
+                    {
+                            <span class="glyphicon glyphicon-ok-sign" style="color:#48C9B0" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+                        else if (item.Result7.Equals("Reject"))
+                        {
+                            <span class="glyphicon glyphicon-remove-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+                        else if (item.Result7.Equals("Edit"))
+                        {
+                            <span class="glyphicon glyphicon-info-sign" style="color:#C70039" data-toggle="tooltip" data-original-title="Vice President for Academic Affairs for Phuket Campus"></span>
+                        }
+
+                    </td>
+                    <td>
+
+
+                       @if (item.Result3 == null)
+                       {
+                        <button class="btn btn-warning" onclick="window.location.href='@Url.Action("Edit", "Proposals", new { @id = item.DocNo })'">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                       }
+
+
+                        <button class="btn btn-success" style="margin-left:5px" onclick="window.location.href='@Url.Action("Details", "Proposals", new { id = item.DocNo})'">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </button>
+
+                        @if (item.Result3 == null)
+                        {
+
+
+
+                            <button class="btn btn-danger" style="margin-left:5px" onclick="window.location.href='@Url.Action("Delete", "Proposals", new { @id = item.DocNo, @did=item.Files.First(f => f.FileType == SAM_V7.Models.FileType.Avatar).FileId})'">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        }
+
+
+                        <button class="btn btn-primary" style="margin-left:5px"  onclick="location.href='@Url.Action("Remark", "Proposals", new { id = item.DocNo })'">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                        </button>
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    
+}

@@ -1,0 +1,102 @@
+﻿@model SAM_V7.Models.Approvers
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    .d {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .c {
+        border-radius: 5px;
+        background-color: #cda8e2;
+        padding: 20px;
+    }
+</style>
+
+<div class="c">
+    <br>
+    <center><h1>APPROVER INFORMATION</h1>
+        <br><h3>Are you sure you want to delete this?</h3></center>
+    <br>
+</div>
+<br>
+
+
+
+
+<div class="d">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Title:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Firstname:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lastname:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Organization:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Position:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Email:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Telephone:")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tel)
+        </dd>
+
+    </dl>
+</div>
+<br>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+
